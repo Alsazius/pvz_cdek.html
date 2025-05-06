@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор ПВЗ СДЭК</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3" charset="utf-8"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+        #cdek-widget-container {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>📍 Выберите пункт выдачи СДЭК</h3>
+    <div id="cdek-widget-container"></div>
+
+    <script>
+        window.onload = function() {
+            if (window.CDEKWidget) {
+                const widget = new CDEKWidget({
+                    container: 'cdek-widget-container',
+                    city_from: 'Москва',
+                    tariffs: [139, 234],
+                    onSuccess: function(data) {
+                        console.log('ПВЗ выбран:', data);
+                        alert('Вы выбрали ПВЗ: ' + JSON.stringify(data));
+                    },
+                    onError: function(err) {
+                        console.error('Ошибка виджета:', err);
+                        alert('Произошла ошибка при выборе ПВЗ');
+                    }
+                });
+            } else {
+                alert('Не удалось загрузить виджет СДЭК');
+            }
+        };
+    </script>
+</body>
+</html>
